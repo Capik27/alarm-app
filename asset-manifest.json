@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/alarm-app/static/css/main.e6568dbd.css",
-    "main.js": "/alarm-app/static/js/main.6aa17f64.js",
+    "main.js": "/alarm-app/static/js/main.261791a4.js",
     "static/js/787.1f79ecb3.chunk.js": "/alarm-app/static/js/787.1f79ecb3.chunk.js",
     "index.html": "/alarm-app/index.html",
     "main.e6568dbd.css.map": "/alarm-app/static/css/main.e6568dbd.css.map",
-    "main.6aa17f64.js.map": "/alarm-app/static/js/main.6aa17f64.js.map",
+    "main.261791a4.js.map": "/alarm-app/static/js/main.261791a4.js.map",
     "787.1f79ecb3.chunk.js.map": "/alarm-app/static/js/787.1f79ecb3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6568dbd.css",
-    "static/js/main.6aa17f64.js"
+    "static/js/main.261791a4.js"
   ]
 }
