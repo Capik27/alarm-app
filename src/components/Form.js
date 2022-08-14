@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { CountdownTimer, StaticTimer, getConvertedTime } from "./Timer.js";
 import Controls from "./Controls.js";
+import { Selectors } from "./Selectors.js";
 import "../style/Form.css";
 
 export default function Form() {
-  const [inputValue, setInputValue] = useState("");
+  const [hour, setHour] = useState(0);
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(0);
   const [timerWorking, setTimerWorking] = useState(false);
   const [alertActivated, setAlertActivated] = useState(false);
 
@@ -14,7 +17,9 @@ export default function Form() {
   };
 
   const handleClickReset = () => {
-    setInputValue("");
+    setHour(0);
+    setMinute(0);
+    setSecond(0);
   };
 
   const handleClickResetTimer = () => {
@@ -31,23 +36,24 @@ export default function Form() {
     setAlertActivated(true);
   };
 
-  const handleInputValueChange = (e) => {
-    e.target.value < 0 ? setInputValue(0) : setInputValue(e.target.value);
+  const getSumTime = () => {
+    return hour * 3600 + minute * 60 + second;
   };
 
   return (
     <>
       <form className="form" onSubmit={handleSubmit}>
-        <input
-          className="form_input"
-          placeholder="Seconds"
-          type="number"
-          value={inputValue}
-          onChange={handleInputValueChange}
+        <Selectors
           disabled={timerWorking || alertActivated}
+          hour={hour}
+          minute={minute}
+          second={second}
+          setHour={setHour}
+          setMinute={setMinute}
+          setSecond={setSecond}
         />
         <Controls
-          inputValue={inputValue}
+          inputValue={getSumTime()}
           timerWorking={timerWorking}
           alertActivated={alertActivated}
           handleSubmit={handleSubmit}
@@ -58,12 +64,12 @@ export default function Form() {
       </form>
       {timerWorking ? (
         <CountdownTimer
-          initialTime={inputValue}
+          initialTime={getSumTime()}
           activateAlarm={handleTurnOnAlarm}
           timerWorking={timerWorking}
         />
       ) : (
-        <StaticTimer time={inputValue} />
+        <StaticTimer time={getSumTime()} />
       )}
     </>
   );

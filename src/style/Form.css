@@ -4,10 +4,10 @@ body {
 
 .form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 5px;
   padding-top: 120px;
-
   margin: 0 auto;
 }
 
@@ -23,42 +23,16 @@ body {
   line-height: 30px;
   outline: none;
 }
-
-.App-logo {
-  position: absolute;
-  bottom: 200px;
-  height: 150px;
-  pointer-events: none;
+.form_flex-row {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 0 auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear, App-logo-vis 7s,
-      App-logo-h 60s;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes App-logo-vis {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 100;
-  }
-}
-@keyframes App-logo-h {
-  from {
-    height: 100px;
-  }
-  to {
-    height: 250px;
-  }
+.form_select {
+  width: 55px;
+  font-size: 26px;
+  line-height: 30px;
+  outline: none;
 }

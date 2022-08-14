@@ -3,7 +3,7 @@ import Alert from "./Alert.js";
 
 export default function Controls(props) {
   return (
-    <>
+    <div className="form_flex-row">
       {!props.timerWorking && !props.alertActivated && (
         <>
           <Button
@@ -37,6 +37,6 @@ export default function Controls(props) {
           <Alert />
         </>
       )}
-    </>
+    </div>
   );
 }
