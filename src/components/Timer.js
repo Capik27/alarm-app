@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { differenceInSeconds } from "date-fns";
 import "../style/Timer.css";
 
 export function getConvertedTime(seconds) {
@@ -16,12 +17,25 @@ export function StaticTimer(props) {
 }
 
 export function CountdownTimer(props) {
-  const [time, setTime] = useState(props.initialTime);
+  const [startdate, setStartDate] = useState(new Date());
+  const [time, setTime] = useState(props.initialTimeSeconds);
   const period = 1000;
 
   useEffect(() => {
     if (props.timerWorking) {
       document.title = getConvertedTime(time);
+      //Date check
+      const date = new Date();
+      const trueTime = differenceInSeconds(date, startdate);
+      const currensy = props.initialTimeSeconds - time;
+      if (trueTime > currensy) {
+        console.log("datesec:", trueTime, "time:", currensy);
+        setTime((prevTime) => {
+          const result = prevTime - (trueTime - currensy);
+          return result >= 0 ? result : 0;
+        });
+      }
+      //
       if (time === 0) {
         props.activateAlarm();
         return;
