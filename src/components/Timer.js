@@ -13,6 +13,9 @@ export function getConvertedTime(seconds) {
 }
 
 export function StaticTimer(props) {
+  useEffect(() => {
+    document.title = getConvertedTime(props.time);
+  }, [props.time]);
   return <span className="timer">{getConvertedTime(props.time)}</span>;
 }
 
