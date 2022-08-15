@@ -7,11 +7,12 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  padding-top: 120px;
+  padding-top: 80px;
   margin: 0 auto;
 }
 
 .form_button {
+  font-family: "Roboto", sans-serif;
   height: 100%;
   line-height: 30px;
   font-size: 17px;
@@ -32,6 +33,7 @@ body {
 
 .form_select {
   width: 55px;
+  font-family: "Roboto", sans-serif;
   font-size: 26px;
   line-height: 30px;
   outline: none;
