@@ -29,7 +29,7 @@ export function CountdownTimer(props) {
       const trueTime = differenceInSeconds(date, props.startdate);
       const currensy = props.initialTimeSeconds - time;
       if (trueTime > currensy) {
-        console.log("datesec:", trueTime, "time:", currensy);
+        //console.log("datesec:", trueTime, "time:", currensy);
         setTime((prevTime) => {
           const result = prevTime - (trueTime - currensy);
           return result >= 0 ? result : 0;
