@@ -27,7 +27,7 @@ export function SelectTime(props) {
   const limit = props.limit;
 
   let optlist = [];
-  for (let i = 0; i <= limit; i++) {
+  for (let i = 0; i < limit; i++) {
     let insert = i > 9 ? i : `0${i}`;
     optlist.push(
       <option value={i} key={i}>
