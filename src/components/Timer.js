@@ -17,19 +17,19 @@ export function StaticTimer(props) {
 }
 
 export function CountdownTimer(props) {
-  const [startdate, setStartDate] = useState(new Date());
+  const [isTick, setIsTick] = useState(false);
   const [time, setTime] = useState(props.initialTimeSeconds);
-  const period = 1000;
+  const period = 500;
 
   useEffect(() => {
     if (props.timerWorking) {
       document.title = getConvertedTime(time);
       //Date check
       const date = new Date();
-      const trueTime = differenceInSeconds(date, startdate);
+      const trueTime = differenceInSeconds(date, props.startdate);
       const currensy = props.initialTimeSeconds - time;
       if (trueTime > currensy) {
-        //console.log("datesec:", trueTime, "time:", currensy);
+        console.log("datesec:", trueTime, "time:", currensy);
         setTime((prevTime) => {
           const result = prevTime - (trueTime - currensy);
           return result >= 0 ? result : 0;
@@ -41,15 +41,20 @@ export function CountdownTimer(props) {
         return;
       }
       const id = setTimeout(() => {
-        setTime((prevTime) => {
-          return prevTime - 1;
-        });
+        if (isTick) {
+          setTime((prevTime) => {
+            return prevTime - 1;
+          });
+          setIsTick(false);
+        } else {
+          setIsTick(true);
+        }
       }, period);
       return () => {
         clearTimeout(id);
       };
     }
-  }, [time]);
+  }, [time, isTick, props]);
 
   return <span className="timer">{getConvertedTime(time)}</span>;
 }

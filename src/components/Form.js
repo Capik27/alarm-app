@@ -66,6 +66,7 @@ export default function Form() {
         <CountdownTimer
           initialTimeSeconds={getSumTime()}
           activateAlarm={handleTurnOnAlarm}
+          startdate={new Date()}
           timerWorking={timerWorking}
         />
       ) : (
