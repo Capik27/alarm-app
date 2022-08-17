@@ -1,42 +1,31 @@
-import Button from "./Button.js";
+import { Button } from "antd";
 import Alert from "./Alert.js";
 
 export default function Controls(props) {
   return (
-    <div className="form_flex-row">
+    <>
       {!props.timerWorking && !props.alertActivated && (
-        <>
-          <Button
-            text={"Start"}
-            type={"submit"}
-            handler={props.handleSubmit}
-            dis={props.inputValue == 0}
-          />
-          <Button
-            text={"Clear"}
-            type={"button"}
-            handler={props.handleReset}
-            dis={props.inputValue == 0}
-          />
-        </>
+        <Button
+          onClick={props.handleSubmit}
+          disabled={props.inputValue === 0}
+          size="large"
+        >
+          Start
+        </Button>
       )}
       {props.timerWorking && !props.alertActivated && (
-        <Button
-          text={"Reset Timer"}
-          type={"button"}
-          handler={props.handleResetTimer}
-        />
+        <Button onClick={props.handleResetTimer} size="large">
+          Reset
+        </Button>
       )}
       {props.alertActivated && (
         <>
-          <Button
-            text={"Turn Off"}
-            type={"button"}
-            handler={props.handleResetSound}
-          />
+          <Button onClick={props.handleResetSound} size="large">
+            Turn Off
+          </Button>
           <Alert />
         </>
       )}
-    </div>
+    </>
   );
 }

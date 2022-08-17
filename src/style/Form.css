@@ -18,11 +18,10 @@ body {
   font-size: 17px;
 }
 
-.form_input {
-  width: 100px;
+.form_time-select {
+  width: 130px;
   font-size: 22px;
   line-height: 30px;
-  outline: none;
 }
 .form_flex-row {
   display: flex;

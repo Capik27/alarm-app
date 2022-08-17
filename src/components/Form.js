@@ -1,30 +1,33 @@
 import { useState } from "react";
-import { CountdownTimer, StaticTimer, getConvertedTime } from "./Timer.js";
+import { CountdownTimer, StaticTimer } from "./Timer.js";
 import Controls from "./Controls.js";
-import { Selectors } from "./Selectors.js";
+import { getSeconds, getMinutes, getHours } from "date-fns";
+import { TimePicker } from "antd";
+import "antd/dist/antd.css";
 import "../style/Form.css";
 
 export default function Form() {
-  const [hour, setHour] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(0);
+  const [timeDateValue, setTimeDateValue] = useState(null);
   const [timerWorking, setTimerWorking] = useState(false);
   const [alertActivated, setAlertActivated] = useState(false);
+
+  const getTimeFromDateObj = (obj) => {
+    if (obj === null) return 0;
+    const date = obj._d;
+    return getHours(date) * 3600 + getMinutes(date) * 60 + getSeconds(date);
+  };
+
+  const handlerSetTimeDateValue = (time) => {
+    setTimeDateValue(time);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTimerWorking(true);
   };
 
-  const handleClickReset = () => {
-    setHour(0);
-    setMinute(0);
-    setSecond(0);
-  };
-
   const handleClickResetTimer = () => {
     setTimerWorking(false);
-    document.title = getConvertedTime(0);
   };
 
   const handleClickResetSound = () => {
@@ -36,41 +39,37 @@ export default function Form() {
     setAlertActivated(true);
   };
 
-  const getSumTime = () => {
-    return hour * 3600 + minute * 60 + second;
-  };
-
   return (
     <>
-      <form className="form" onSubmit={handleSubmit}>
-        <Selectors
-          disabled={timerWorking || alertActivated}
-          hour={hour}
-          minute={minute}
-          second={second}
-          setHour={setHour}
-          setMinute={setMinute}
-          setSecond={setSecond}
-        />
-        <Controls
-          inputValue={getSumTime()}
-          timerWorking={timerWorking}
-          alertActivated={alertActivated}
-          handleSubmit={handleSubmit}
-          handleReset={handleClickReset}
-          handleResetTimer={handleClickResetTimer}
-          handleResetSound={handleClickResetSound}
-        />
+      <form className="form">
+        <div className="form_flex-row">
+          <div className="form_time-select">
+            <TimePicker
+              value={timeDateValue}
+              onChange={handlerSetTimeDateValue}
+              disabled={timerWorking || alertActivated}
+              size="large"
+            />
+          </div>
+          <Controls
+            inputValue={getTimeFromDateObj(timeDateValue)}
+            timerWorking={timerWorking}
+            alertActivated={alertActivated}
+            handleSubmit={handleSubmit}
+            handleResetTimer={handleClickResetTimer}
+            handleResetSound={handleClickResetSound}
+          />
+        </div>
       </form>
       {timerWorking ? (
         <CountdownTimer
-          initialTimeSeconds={getSumTime()}
+          initialTimeSeconds={getTimeFromDateObj(timeDateValue)}
           activateAlarm={handleTurnOnAlarm}
           startdate={new Date()}
           timerWorking={timerWorking}
         />
       ) : (
-        <StaticTimer time={getSumTime()} />
+        <StaticTimer time={getTimeFromDateObj(timeDateValue)} />
       )}
     </>
   );
