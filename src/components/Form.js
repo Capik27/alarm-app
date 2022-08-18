@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CountdownTimer, StaticTimer } from "./Timer.js";
 import Controls from "./Controls.js";
+import Alert from "./Alert.js";
 import { getSeconds, getMinutes, getHours } from "date-fns";
 import { TimePicker } from "antd";
 import "antd/dist/antd.css";
@@ -61,6 +62,7 @@ export default function Form() {
           />
         </div>
       </form>
+      <Alert isPlaying={alertActivated} />
       {timerWorking ? (
         <CountdownTimer
           initialTimeSeconds={getTimeFromDateObj(timeDateValue)}

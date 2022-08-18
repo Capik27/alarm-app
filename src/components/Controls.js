@@ -1,5 +1,4 @@
 import { Button } from "antd";
-import Alert from "./Alert.js";
 
 export default function Controls(props) {
   return (
@@ -23,7 +22,6 @@ export default function Controls(props) {
           <Button onClick={props.handleResetSound} size="large">
             Turn Off
           </Button>
-          <Alert />
         </>
       )}
     </>
